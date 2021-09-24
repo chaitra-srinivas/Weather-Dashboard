@@ -1,9 +1,9 @@
 :root {
-    --primary: #d5fcf8;
-    --secondary: #addde4;
-    --tertiary: #8eb1b1;
-    --light-dark: #719191;
-    --dark: #233331;
+    --primary: #d6dde6;
+    --secondary: #a7b5dd;
+    --tertiary: #5f819c;
+    --light-dark: #3d5a91;
+    --dark: #19287e;
     --border-radius: 0.3rem;
   }
   
@@ -15,7 +15,7 @@
     background-color: var(--primary);
     margin: 0;
     padding: 0;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
     color: var(--dark);
     line-height: 1.5;
     font-size: 16px;
@@ -80,7 +80,7 @@ h1,
     display: inline-block;
     width: auto;
     margin-top: 20px;
-    padding: 15px;
+    padding: 5%;
     text-decoration: none;
     font-size: 1.2rem;
   }
@@ -138,19 +138,18 @@ h1,
   /* CARDS */
   .card {
     margin: 0 0 20px 0;
-    border: 3px solid var(--dark);
+    border: 2px solid var(--dark);
     border-radius: var(--border-radius);
   }
   
   .card-header {
-    color: var(--primary);
-    background-color: var(--dark);
-    padding: 2.5%;
+    color: var(--dark);
+    padding: 2%;
     border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
   }
   
   .card-body {
-    padding: 2.5%;
+    padding: 2%;
   }
   
   /* FORM */
@@ -161,7 +160,7 @@ h1,
   }
   
   .form-label {
-    font-size: 1.1rem;
+    font-size: 0.5rem;
     margin: 0 0 0 5px;
   }
   
@@ -183,10 +182,7 @@ h1,
     min-width: 100vw;
   }
   
-  /* FONT UTILS */
-  .text-uppercase {
-    text-transform: uppercase;
-  }
+ 
   
   /* FLEX CONTENT */
   .flex-row {
