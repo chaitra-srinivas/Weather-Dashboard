@@ -10,15 +10,22 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/style.css" />
+<!--     <link rel="stylesheet" href="./assets/css/style.css" /> -->
 </head>
 
 <body>
-    <nav  id="nav-header">
-                   <span id="header-title">Weather Dashboard</span>
-     </nav>
-    <main class="flex-row justify-space-between">
-        <div class="col-12 col-md-3">
+
+
+    <div class="jumbotron">
+        <h1 class="display-4 text-center g-2">Weather Dashboard</h1>
+    </div>
+
+   <!--  <main class="flex-row justify-space-between"> -->
+       <div class="container">
+
+
+           <div class="row">
+        <div class="col-3">
             <div class="card">
                 <h3 class="card-header">Search for a city:</h3>
                 <form id="search-form" class="card-body">
@@ -33,16 +40,25 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-9">
+        <div class="col-9">
             <div class="row g-2">
                 <div class="col-12">
                     <div class="p-3 border bg-light">
                         <h5>Current weather in <span id="city-name-cur-date"> </span></h5>
-                        <span id="cur-icon"></span>
+                        <img id="cur-icon"></img>
                         <p id="cur-temp"></p>
                         <p id="cur-wind"></p>
                         <p id="cur-humidity"></p>
-                        <p id="cur-UV"></p>
+                        <span>UV Index:</span>
+                        <span class="badge bg-primary">Primary</span>
+    <span class="badge bg-secondary">Secondary</span>
+    <span class="badge bg-success">Success</span>
+    <span class="badge bg-danger">Danger</span>
+    <span class="badge bg-warning text-dark">Warning</span>
+    <span class="badge bg-info text-dark">Info</span>
+    <span class="badge bg-light text-dark">Light</span>
+    <span class="badge bg-dark">Dark</span>
+                        <span id="cur-UV" class="badge">xxx</span>
                     </div>
                 </div>
             </div>
@@ -94,7 +110,9 @@
                         <p id="forecast-humidity5"></p>
                     </div>
                 </div>
-    </main>
+            </div>
+            </div>
+    <!-- </main> -->
     <script src="./assets/js/script.js"></script>
 </body>
 

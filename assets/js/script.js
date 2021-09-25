@@ -26,13 +26,22 @@ function getCityWeather(cityNameEl) {
   //api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
   // api.openweathermap.org/data/2.5/forecast?q=London&appid={API key}
-  var weaQueryUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
+ /*  var weaQueryUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
   var queryUnits = "&units=metric";
   var queryUrl = weaQueryUrl + cityNameEl + queryUnits + "&appid=" + apiKey;
+ */
+// using the URL api
 
-  fetch(queryUrl)
+
+var curWeatherURL = new URL("https://api.openweathermap.org/data/2.5/weather");
+curWeatherURL.searchParams.set('q', cityNameEl);
+curWeatherURL.searchParams.set('units', 'metric');
+curWeatherURL.searchParams.set('appid', apiKey);
+
+
+  fetch(curWeatherURL)
     .then(function (response) {
-      if (!response.ok) {
+      if (!response.ok) {   
         throw response.json();
       }
       return response.json();
@@ -77,11 +86,12 @@ function renderQueryResults(queryRes) {
     "src",
     "https://openweathermap.org/img/w/" + queryRes.weather[0].icon + ".png"
   );
-  $("#cur-icon").append($weatherIcon);
-  $("#city-name-cur-date").append(queryRes.name + " (" + $curDate + ")");
-  $("#cur-temp").append("Temp: " + queryRes.main.temp);
-  $("#cur-wind").append("Wind: " + queryRes.wind.speed);
-  $("#cur-humidity").append("Humidity: " + queryRes.main.humidity);
+  $("#cur-icon").attr('src', "https://openweathermap.org/img/w/" + queryRes.weather[0].icon + ".png");
+  $("#cur-icon").attr('title', queryRes.weather[0].description);
+  $("#city-name-cur-date").text(queryRes.name + " (" + $curDate + ")");
+  $("#cur-temp").text("Temp: " + queryRes.main.temp + ' °C');
+  $("#cur-wind").text("Wind: " + queryRes.wind.speed + ' km/h');
+  $("#cur-humidity").text("Humidity: " + queryRes.main.humidity + ' %');
 
   // To get uv index
 
@@ -95,7 +105,7 @@ function renderQueryResults(queryRes) {
     newurl.searchParams.set('lat', 12);
     newurl.searchParams.set('lon', 13);
 
-    alert(newurl);
+   /*  alert(newurl); */
 
   var queryUnits = "&units=metric";
   var queryUVIndexUrl =
@@ -120,7 +130,8 @@ function renderQueryResults(queryRes) {
     .then(function (UVdata) {
       console.log("This is uvdata: " + UVdata.current.uvi);
       /*  renderForecastResults(queryForecastRes); */
-      $("#cur-UV").append("UV Index: " + UVdata.current.uvi);
+     
+      $("#cur-UV").text(UVdata.current.uvi);
     })
     .catch(function (error) {
       console.error(error);
