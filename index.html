@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 
@@ -34,26 +36,63 @@
         <div class="col-12 col-md-9">
             <div class="row g-2">
                 <div class="col-12">
-                    <div class="p-3 border bg-light">Current weather</div>
+                    <div class="p-3 border bg-light">
+                        <h5>Current weather in <span id="city-name-cur-date"> </span></h5>
+                        <span id="cur-icon"></span>
+                        <p id="cur-temp"></p>
+                        <p id="cur-wind"></p>
+                        <p id="cur-humidity"></p>
+                        <p id="cur-UV"></p>
+                    </div>
                 </div>
             </div>
 
             <h5>Five day forecast:</h5>
             <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
                 <div class="col">
-                    <div class="p-3 border bg-light">Row column</div>
+                    <div class="p-3 border bg-light" id="forecast-day1">
+                        <span id="forecast-date1"></span>
+                        <span id="forecast-icon1"></span>
+                        <p id="forecast-temp1"></p>
+                        <p id="forecast-wind1"></p>
+                        <p id="forecast-humidity1"></p>
+                    </div>
                 </div>
                 <div class="col">
-                    <div class="p-3 border bg-light">Row column</div>
+                    <div class="p-3 border bg-light" id="forecast-day2">
+                        <span id="forecast-date2"></span>
+                        <span id="forecast-icon2"></span>
+                        <p id="forecast-temp2"></p>
+                        <p id="forecast-wind2"></p>
+                        <p id="forecast-humidity2"></p>
+                    </div>
                 </div>
                 <div class="col">
-                    <div class="p-3 border bg-light">Row column</div>
+                    <div class="p-3 border bg-light" id="forecast-day3">
+                        <span id="forecast-date3"></span>
+                        <span id="forecast-icon3"></span>
+                        <p id="forecast-temp3"></p>
+                        <p id="forecast-wind3"></p>
+                        <p id="forecast-humidity3"></p>
+                    </div>
                 </div>
                 <div class="col">
-                    <div class="p-3 border bg-light">Row column</div>
+                    <div class="p-3 border bg-light" id="forecast-day4">
+                        <span id="forecast-date4"></span>
+                        <span id="forecast-icon4"></span>
+                        <p id="forecast-temp4"></p>
+                        <p id="forecast-wind4"></p>
+                        <p id="forecast-humidity4"></p>
+                    </div>
                 </div>
                 <div class="col">
-                    <div class="p-3 border bg-light">Row column</div>
+                    <div class="p-3 border bg-light" id="forecast-day5">
+                        <span id="forecast-date5"></span>
+                        <span id="forecast-icon5"></span>
+                        <p id="forecast-temp5"></p>
+                        <p id="forecast-wind5"></p>
+                        <p id="forecast-humidity5"></p>
+                    </div>
                 </div>
     </main>
     <script src="./assets/js/script.js"></script>
