@@ -23,13 +23,7 @@ function getUserInput(event) {
 $searchFormEl.submit(getUserInput);
 
 function getCityWeather(cityNameEl) {
-  //api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-
-  // api.openweathermap.org/data/2.5/forecast?q=London&appid={API key}
- /*  var weaQueryUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
-  var queryUnits = "&units=metric";
-  var queryUrl = weaQueryUrl + cityNameEl + queryUnits + "&appid=" + apiKey;
- */
+//api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 // using the URL api
 
 
@@ -78,6 +72,8 @@ function getCityForecast(cityNameEl) {
     });
 }
 
+// Function to print the current weather conditions for the city
+
 function renderQueryResults(queryRes) {
   console.log(queryRes.name);
   var $curDate = moment.unix(queryRes.dt).format("DD/MM/YYYY");
@@ -95,32 +91,19 @@ function renderQueryResults(queryRes) {
 
   // To get uv index
 
-  // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-/* alert(JSON.stringify(queryRes)); */
+ // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
+
+ // latitude and longitude values for the current city
 
   var latitude = queryRes.coord.lat;
   var longitude = queryRes.coord.lon;
-  var queryUVIndex = "https://api.openweathermap.org/data/2.5/onecall?";
-    var newurl = new URL("https://api.openweathermap.org/data/2.5/onecall");
-    newurl.searchParams.set('lat', 12);
-    newurl.searchParams.set('lon', 13);
 
-   /*  alert(newurl); */
+  var queryUVIndex = new URL("https://api.openweathermap.org/data/2.5/onecall");
+  queryUVIndex.searchParams.set('lat', latitude);
+  queryUVIndex.searchParams.set('lon', longitude);
+  queryUVIndex.searchParams.set('appid', apiKey);
 
-  var queryUnits = "&units=metric";
-  var queryUVIndexUrl =
-    queryUVIndex +
-    /* queryRes.name + */
-   /*  queryUnits + */
-    "lat=" +
-    latitude +
-    "&lon=" +
-    longitude +
-    "&appid=" +
-    apiKey;
-
-     console.log(queryUVIndexUrl); 
-  fetch(queryUVIndexUrl)
+  fetch(queryUVIndex)
     .then(function (response) {
       if (!response.ok) {
         throw response.json();
@@ -128,14 +111,42 @@ function renderQueryResults(queryRes) {
       return response.json();
     })
     .then(function (UVdata) {
-      console.log("This is uvdata: " + UVdata.current.uvi);
-      /*  renderForecastResults(queryForecastRes); */
-     
-      $("#cur-UV").text(UVdata.current.uvi);
-    })
+     uvIndexWarning(UVdata.current.uvi)
+     })
     .catch(function (error) {
       console.error(error);
     });
+}
+// Color coding uv index badges based on the current index value
+function uvIndexWarning(uvIndex){
+    var curUVEl =   $("#cur-UV");
+    curUVEl.removeClass("bg-secondary bg-primary bg-success bg-warning bg-danger");
+
+    if(uvIndex <= 3){
+        curUVEl.addClass("bg-secondary");
+        curUVEl.text(uvIndex);
+    }
+    if(uvIndex > 3 && uvIndex <7)
+    {
+        curUVEl.addClass("bg-primary");
+        curUVEl.text(uvIndex);
+    }
+    if(uvIndex > 7 && uvIndex <8)
+    {
+        curUVEl.addClass("bg-success");
+        curUVEl.text(uvIndex);
+    }
+    if(uvIndex > 8 && uvIndex <11)
+    {
+        curUVEl.addClass("bg-warning");
+        curUVEl.text(uvIndex);
+    }
+    if(uvIndex >= 11)
+    {
+        curUVEl.addClass("bg-danger");
+        curUVEl.text(uvIndex);
+    }
+
 }
 
 function renderForecastResults(queryForecastRes) {
