@@ -48,29 +48,6 @@ curWeatherURL.searchParams.set('appid', apiKey);
     });
 }
 
-/* function getCityForecast(cityNameEl) {
-  // api.openweathermap.org/data/2.5/forecast?q=London&appid={API key}
-  
-var forecastWeatherURL = new URL("https://api.openweathermap.org/data/2.5/onecall");
-forecastWeatherURL.searchParams.set('q', cityNameEl);
-forecastWeatherURL.searchParams.set('units', 'metric');
-forecastWeatherURL.searchParams.set('appid', apiKey);
-
-  fetch(forecastWeatherURL)
-    .then(function (response) {
-      if (!response.ok) {
-        throw response.json();
-      }
-      return response.json();
-    })
-    .then(function (queryForecastRes) {
-      console.log(queryForecastRes);
-      renderForecastResults(queryForecastRes);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
-} */
 
 // Function to print the current weather conditions for the city
 
