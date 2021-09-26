@@ -17,7 +17,7 @@ function getUserInput(event) {
   }
 
   getCityWeather($cityNameEl);
-  getCityForecast($cityNameEl);
+ 
 }
 
 $searchFormEl.submit(getUserInput);
@@ -25,7 +25,6 @@ $searchFormEl.submit(getUserInput);
 function getCityWeather(cityNameEl) {
 //api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 // using the URL api
-
 
 var curWeatherURL = new URL("https://api.openweathermap.org/data/2.5/weather");
 curWeatherURL.searchParams.set('q', cityNameEl);
@@ -49,14 +48,15 @@ curWeatherURL.searchParams.set('appid', apiKey);
     });
 }
 
-function getCityForecast(cityNameEl) {
+/* function getCityForecast(cityNameEl) {
   // api.openweathermap.org/data/2.5/forecast?q=London&appid={API key}
-  var weaForecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=";
-  var queryUnits = "&units=metric";
-  var queryForecastUrl =
-    weaForecastUrl + cityNameEl + queryUnits + "&appid=" + apiKey;
+  
+var forecastWeatherURL = new URL("https://api.openweathermap.org/data/2.5/onecall");
+forecastWeatherURL.searchParams.set('q', cityNameEl);
+forecastWeatherURL.searchParams.set('units', 'metric');
+forecastWeatherURL.searchParams.set('appid', apiKey);
 
-  fetch(queryForecastUrl)
+  fetch(forecastWeatherURL)
     .then(function (response) {
       if (!response.ok) {
         throw response.json();
@@ -70,19 +70,15 @@ function getCityForecast(cityNameEl) {
     .catch(function (error) {
       console.error(error);
     });
-}
+} */
 
 // Function to print the current weather conditions for the city
 
 function renderQueryResults(queryRes) {
-  console.log(queryRes.name);
+ 
   var $curDate = moment.unix(queryRes.dt).format("DD/MM/YYYY");
-  var $weatherIcon = $("<img>");
-  $weatherIcon.attr(
-    "src",
-    "https://openweathermap.org/img/w/" + queryRes.weather[0].icon + ".png"
-  );
-  $("#cur-icon").attr('src', "https://openweathermap.org/img/w/" + queryRes.weather[0].icon + ".png");
+      
+  $("#cur-icon").attr('src',getIconPath(queryRes.weather[0].icon));
   $("#cur-icon").attr('title', queryRes.weather[0].description);
   $("#city-name-cur-date").text(queryRes.name + " (" + $curDate + ")");
   $("#cur-temp").text("Temp: " + queryRes.main.temp + ' °C');
@@ -101,6 +97,7 @@ function renderQueryResults(queryRes) {
   var queryUVIndex = new URL("https://api.openweathermap.org/data/2.5/onecall");
   queryUVIndex.searchParams.set('lat', latitude);
   queryUVIndex.searchParams.set('lon', longitude);
+  queryUVIndex.searchParams.set('units', 'metric');
   queryUVIndex.searchParams.set('appid', apiKey);
 
   fetch(queryUVIndex)
@@ -111,7 +108,8 @@ function renderQueryResults(queryRes) {
       return response.json();
     })
     .then(function (UVdata) {
-     uvIndexWarning(UVdata.current.uvi)
+     uvIndexWarning(UVdata.current.uvi);
+     renderForecastResults(UVdata.daily);
      })
     .catch(function (error) {
       console.error(error);
@@ -150,14 +148,22 @@ function uvIndexWarning(uvIndex){
 }
 
 function renderForecastResults(queryForecastRes) {
-  var $curDate = moment.unix(queryForecastRes.dt).format("DD/MM/YYYY");
 
   console.log(queryForecastRes);
+  
+  for(var i=1; i<queryForecastRes.length-1; i++){
+      var elementPosition = i;
+      var forecast = queryForecastRes[i];
+      var forecastDate = moment.unix(forecast.dt).format("DD/MM/YYYY");
+        $(`#forecast-date${elementPosition}`).text(forecastDate);
+        $(`#forecast-icon${elementPosition}`).attr('src',getIconPath(forecast.weather[0].icon));
+        $(`#forecast-temp${elementPosition}`).text(forecast.temp.max + " °C");
+        $(`#forecast-wind${elementPosition}`).text(forecast.wind_speed + " Km/h");
+        $(`#forecast-humidity${elementPosition}`).text(forecast.humidity + " %");
+  }
 
-  /*  var $curDate = moment.unix(queryForecastRes.dt).format("DD/MM/YYYY");
-    $("#city-name-cur-date").append(queryRes.name + " (" + $curDate +")");
-    $("#cur-temp").append("Temp: " + queryRes.main.temp);
-    $("#cur-wind").append("Wind: " + queryRes.wind.speed);
-    $("#cur-humidity").append("Humidity: " + queryRes.main.humidity);
-    $("#cur-UV").append("UV Index: " + queryRes.main.temp); */
+}
+
+function getIconPath(iconName){
+    return "https://openweathermap.org/img/w/" + iconName + ".png";
 }
