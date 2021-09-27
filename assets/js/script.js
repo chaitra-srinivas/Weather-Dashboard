@@ -174,8 +174,8 @@ for(var i=0;i<cityList.length;i++){
 
     var cityName = cityList[i];
     /* getCityWeather(cityName) */
-    var anchorEl = $('<a>').attr('href','#').attr('onClick',`getCityWeather('${cityName}')`).attr('class','text-decoration-none').append(cityName);
-    var listItem = $('<li>').append(anchorEl);
+    var anchorEl = $('<a>').attr('href','#').attr('onClick',`getCityWeather('${cityName}')`).attr('class','text-decoration-none text-dark').append(cityName);
+    var listItem = $('<li>').attr('class','list-group-item bg-light text-center mt-2').append(anchorEl);
     $('#search-list').append(listItem);
 }
 
