@@ -19,8 +19,9 @@ function getUserInput(event) {
   }
 
   getCityWeather(cityName);
-  storeCity(cityName);
-  renderStoredCityList(getCityListFromStorage());
+ /*  storeCity(cityName); */
+/*   renderStoredCityList(getCityListFromStorage()); */
+ 
 }
 
 
@@ -38,6 +39,7 @@ function setCityListToStorage(cityList) {
   localStorage.setItem("CITY_LIST", cityListStr);
 }
 
+// Checks if the city name has already been added to the local storage.
 function storeCity(cityName) {
   var cityList = getCityListFromStorage();
 
@@ -64,13 +66,16 @@ function getCityWeather(cityName) {
   fetch(curWeatherURL)
     .then(function (response) {
       if (!response.ok) {
+        alert("Some thing went wrong-Please enter a valid city name");
         throw response.json();
-      }
+       }
       return response.json();
     })
     .then(function (queryRes) {
       console.log(queryRes);
       renderQueryResults(queryRes);
+      storeCity(cityName);
+      renderStoredCityList(getCityListFromStorage());
     })
     .catch(function (error) {
       console.error(error);
