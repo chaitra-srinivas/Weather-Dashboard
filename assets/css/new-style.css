@@ -2,4 +2,11 @@
     width: 190px;
 }
 .forecast-card{
-   background-color: cadetblue;}
+   background-color: cadetblue;
+    overflow: hidden;
+}
+
+.cur-weather-card{
+    background-color: cadetblue;
+    overflow: hidden;
+}

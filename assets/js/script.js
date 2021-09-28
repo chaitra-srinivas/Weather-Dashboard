@@ -23,6 +23,7 @@ function getUserInput(event) {
   renderStoredCityList(getCityListFromStorage());
 }
 
+
 function getCityListFromStorage() {
   var cityListStr = localStorage.getItem("CITY_LIST");
   if (cityListStr) {
@@ -94,8 +95,15 @@ function renderQueryResults(queryRes) {
 
   // latitude and longitude values for the current city
 
-  var latitude = queryRes.coord.lat;
-  var longitude = queryRes.coord.lon;
+  getUVIndex(queryRes.coord.lat,queryRes.coord.lon);
+
+}
+
+// function to get the UV Index
+
+function getUVIndex(lat,lon){
+  var latitude = lat;
+  var longitude = lon;
 
   var queryUVIndex = new URL("https://api.openweathermap.org/data/2.5/onecall");
   queryUVIndex.searchParams.set("lat", latitude);
@@ -117,10 +125,16 @@ function renderQueryResults(queryRes) {
     .catch(function (error) {
       console.error(error);
     });
+
 }
+
+
 // Color coding uv index badges based on the current index value
 function uvIndexWarning(uvIndex) {
   var curUVEl = $("#cur-UV");
+  var uvIndexEl = $('#uvIndex');
+
+  uvIndexEl.text('UV Index: ');
   curUVEl.removeClass(
     "bg-secondary bg-primary bg-success bg-warning bg-danger"
   );
@@ -159,27 +173,28 @@ function renderForecastResults(queryForecastRes) {
       "src",
       getIconPath(forecast.weather[0].icon)
     );
-    $(`#forecast-temp${elementPosition}`).text(forecast.temp.max + " °C");
-    $(`#forecast-wind${elementPosition}`).text(forecast.wind_speed + " Km/h");
-    $(`#forecast-humidity${elementPosition}`).text(forecast.humidity + " %");
+    $(`#forecast-temp${elementPosition}`).text('Temp: '+forecast.temp.max + " °C");
+    $(`#forecast-wind${elementPosition}`).text('Wind: '+forecast.wind_speed + " Km/h");
+    $(`#forecast-humidity${elementPosition}`).text('Humidity: '+forecast.humidity + " %");
   }
 }
 
-function renderStoredCityList(cityList){
+function renderStoredCityList(cityList) {
+  $("#search-list").empty();
 
-$('#search-list').empty();
-
-
-for(var i=0;i<cityList.length;i++){
-
+  for (var i = 0; i < cityList.length; i++) {
     var cityName = cityList[i];
     /* getCityWeather(cityName) */
-    var anchorEl = $('<a>').attr('href','#').attr('onClick',`getCityWeather('${cityName}')`).attr('class','text-decoration-none text-dark').append(cityName);
-    var listItem = $('<li>').attr('class','list-group-item bg-light text-center mt-2').append(anchorEl);
-    $('#search-list').append(listItem);
-}
-
-
+    var anchorEl = $("<a>")
+      .attr("href", "#")
+      .attr("onClick", `getCityWeather('${cityName}')`)
+      .attr("class", "text-decoration-none text-dark")
+      .append(cityName);
+    var listItem = $("<li>")
+      .attr("class", "list-group-item bg-light text-center mt-2")
+      .append(anchorEl);
+    $("#search-list").append(listItem);
+  }
 }
 
 function getIconPath(iconName) {
