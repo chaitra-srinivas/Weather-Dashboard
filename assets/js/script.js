@@ -2,10 +2,22 @@ var $submitBtnEl = $("#submit-city");
 var $searchFormEl = $("#search-form");
 var $curWeatherEl = $("#cur-weather");
 
-/* var apiKey = new URL(window.location).searchParams.get("token"); */
 var apiKey = "d1a3e244cfb4477cc46192f257eb4d5d";
 
 renderStoredCityList(getCityListFromStorage());
+$("#curr-weather-card").hide();
+$("#5-day-forecast-card").hide();
+$("#forecast-header").hide();
+$("#error-display").hide();
+/* 
+$(function(){
+  confirm("Do you want to allow browser to get your current location?")
+  if(confirm.ok){
+    getGeoLocation();
+  }else{
+    return;
+  }
+}); */
 
 function getUserInput(event) {
   event.preventDefault();
@@ -14,15 +26,28 @@ function getUserInput(event) {
 
   console.log(cityName);
   if (!cityName) {
-    console.error("Please enter a city");
+    /*  console.error("Please enter a city"); */
     return;
   }
-
   getCityWeather(cityName);
- /*  storeCity(cityName); */
-/*   renderStoredCityList(getCityListFromStorage()); */
- 
+
 }
+
+// Fucntion to get geolocation of the user
+
+function getGeoLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    alert("Geolocation is not supported by this browser!");
+  }
+}
+function showPosition(position) {
+  /*  getUVIndex(position.coords.latitude,position.coords.longitude); // To get cur position forecast */
+  alert("Lat: " + position.coords.latitude + "Lon: " + position.coords.longitude);
+
+}
+
 
 
 function getCityListFromStorage() {
@@ -56,6 +81,7 @@ function getCityWeather(cityName) {
   //api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
   // using the URL api
 
+
   var curWeatherURL = new URL(
     "https://api.openweathermap.org/data/2.5/weather"
   );
@@ -66,9 +92,13 @@ function getCityWeather(cityName) {
   fetch(curWeatherURL)
     .then(function (response) {
       if (!response.ok) {
-        alert("Some thing went wrong-Please enter a valid city name");
+        $("#error-display").show();
+        $("#curr-weather-card").hide();
+        $("#5-day-forecast-card").hide();
+        $("#forecast-header").hide();
         throw response.json();
-       }
+      }
+     
       return response.json();
     })
     .then(function (queryRes) {
@@ -85,6 +115,8 @@ function getCityWeather(cityName) {
 // Function to print the current weather conditions for the city
 
 function renderQueryResults(queryRes) {
+  $("#error-display").hide();
+  $("#curr-weather-card").show();
   var $curDate = moment.unix(queryRes.dt).format("DD/MM/YYYY");
 
   $("#cur-icon").attr("src", getIconPath(queryRes.weather[0].icon));
@@ -100,13 +132,13 @@ function renderQueryResults(queryRes) {
 
   // latitude and longitude values for the current city
 
-  getUVIndex(queryRes.coord.lat,queryRes.coord.lon);
+  getUVIndex(queryRes.coord.lat, queryRes.coord.lon);
 
 }
 
 // function to get the UV Index
 
-function getUVIndex(lat,lon){
+function getUVIndex(lat, lon) {
   var latitude = lat;
   var longitude = lon;
 
@@ -166,7 +198,12 @@ function uvIndexWarning(uvIndex) {
   }
 }
 
+// Function to print the forecast for 5 days
 function renderForecastResults(queryForecastRes) {
+  $("#forecast-header").show();
+  $("#5-day-forecast-card").show();
+
+
   console.log(queryForecastRes);
 
   for (var i = 1; i < queryForecastRes.length - 1; i++) {
@@ -178,18 +215,20 @@ function renderForecastResults(queryForecastRes) {
       "src",
       getIconPath(forecast.weather[0].icon)
     );
-    $(`#forecast-temp${elementPosition}`).text('Temp: '+forecast.temp.max + " °C");
-    $(`#forecast-wind${elementPosition}`).text('Wind: '+forecast.wind_speed + " Km/h");
-    $(`#forecast-humidity${elementPosition}`).text('Humidity: '+forecast.humidity + " %");
+    $(`#forecast-temp${elementPosition}`).text('Temp: ' + forecast.temp.max + " °C");
+    $(`#forecast-wind${elementPosition}`).text('Wind: ' + forecast.wind_speed + " Km/h");
+    $(`#forecast-humidity${elementPosition}`).text('Humidity: ' + forecast.humidity + " %");
   }
 }
+
+// Fucntion to display the search list from local storage
 
 function renderStoredCityList(cityList) {
   $("#search-list").empty();
 
   for (var i = 0; i < cityList.length; i++) {
     var cityName = cityList[i];
-    /* getCityWeather(cityName) */
+
     var anchorEl = $("<a>")
       .attr("href", "#")
       .attr("onClick", `getCityWeather('${cityName}')`)
@@ -202,6 +241,7 @@ function renderStoredCityList(cityList) {
   }
 }
 
+// gets the icon from the given path
 function getIconPath(iconName) {
   return "https://openweathermap.org/img/w/" + iconName + ".png";
 }

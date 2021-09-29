@@ -10,14 +10,13 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
- <link rel="stylesheet" href="./assets/css/new-style.css" /> 
+ <link rel="stylesheet" href="./assets/css/style.css" /> 
 </head>
-
 <body>
 
 
-    <div class="jumbotron">
-        <h1 class="display-4 text-center g-2">Weather Dashboard</h1>
+    <div id="navbar"  class="jumbotron bg-secondary" >
+        <h1 class="display-4 text-center g-2 text-light font-weight-bold">Weather Dashboard</h1>
     </div>
    
     <div class="container">
@@ -26,8 +25,10 @@
             <div class="card">
                 <h3 class="card-header">Search for a city:</h3>
                 <form id="search-form" class="card-body">
+                    <div class ="d-grid gap-2 d-md-block" >
                     <input id="city-name" type="text" autofocus="true" class="form-input" placeholder="Search!" /></br>
-                    <button type="submit" id="submit-city" class="mt-2 pt-0 btn-block btn btn-primary">Submit</button>
+                    <button type="submit" id="submit-city" class="mt-2 pt-0 btn-block btn btn-secondary text-light">Submit</button>
+                </div>
                 </form>
             </div>
             <div class="search-history">
@@ -39,23 +40,27 @@
 
         <div class="col-9">
             <div class="row g-2">
-                <div class="col-12 cur-weather-card">
-                    <div class="p-3 border border-dark bg-light cur-weather-card">
+              <div class="col-12" id="curr-weather-card">
+                    <div class="p-3 border border-dark bg-light">
+                   
                         <h5>Current weather in <span id="city-name-cur-date"> </span></h5>
                         <img id="cur-icon"></img>
                         <p id="cur-temp"></p>
                         <p id="cur-wind"></p>
                         <p id="cur-humidity"></p>
                         <span id="uvIndex"></span>
-                        <span id="cur-UV" class="badge">xxx</span>
+                        <span id="cur-UV" class="badge"></span>
                     </div>
                 </div>
             </div>
-
-            <h5>Five day forecast:</h5>
-            <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                <div class="col forecast-card">
-                    <div class="p-3 border bg-light forecast-card" id="forecast-day1">
+            <div class="col-12 bg-light p-3 mt-2 border" id="error-display">
+                <h4>"No results found for the city!"</h4>
+            </div>
+            <div id="forecast-header"><h5>Five day forecast:</h5></div>
+            <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3" id="5-day-forecast-card" >
+                
+                <div class="col 5-day-forecast-card">
+                    <div class="p-3 border forecast-card" id="forecast-day1">
                         <span id="forecast-date1"></span></br>
                         <img id="forecast-icon1"/>
                         <p id="forecast-temp1"></p>
@@ -63,8 +68,8 @@
                         <p id="forecast-humidity1"></p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="p-3 border bg-light" id="forecast-day2">
+                <div class="col 5-day-forecast-card">
+                    <div class="p-3 border forecast-card" id="forecast-day2">
                         <span id="forecast-date2"></span></br>
                         <img id="forecast-icon2"/>
                         <p id="forecast-temp2"></p>
@@ -72,8 +77,8 @@
                         <p id="forecast-humidity2"></p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="p-3 border bg-light" id="forecast-day3">
+                <div class="col 5-day-forecast-card">
+                    <div class="p-3 border forecast-card" id="forecast-day3">
                         <span id="forecast-date3"></span></br>
                         <img id="forecast-icon3"/>
                         <p id="forecast-temp3"></p>
@@ -81,8 +86,8 @@
                         <p id="forecast-humidity3"></p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="p-3 border bg-light" id="forecast-day4">
+                <div class="col 5-day-forecast-card">
+                    <div class="p-3 border forecast-card" id="forecast-day4">
                         <span id="forecast-date4"></span></br>
                         <img id="forecast-icon4"/>
                         <p id="forecast-temp4"></p>
@@ -90,8 +95,8 @@
                         <p id="forecast-humidity4"></p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="p-3 border bg-light" id="forecast-day5">
+                <div class="col 5-day-forecast-card">
+                    <div class="p-3 border forecast-card" id="forecast-day5">
                         <span id="forecast-date5"></span></br>
                         <img id="forecast-icon5"/>
                         <p id="forecast-temp5"></p>
