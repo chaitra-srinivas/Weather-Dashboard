@@ -4,20 +4,18 @@ var $curWeatherEl = $("#cur-weather");
 
 var apiKey = "d1a3e244cfb4477cc46192f257eb4d5d";
 
+
+init();
+
+function init(){
 renderStoredCityList(getCityListFromStorage());
 $("#curr-weather-card").hide();
 $("#5-day-forecast-card").hide();
 $("#forecast-header").hide();
 $("#error-display").hide();
-/* 
-$(function(){
-  confirm("Do you want to allow browser to get your current location?")
-  if(confirm.ok){
-    getGeoLocation();
-  }else{
-    return;
-  }
-}); */
+
+}
+
 
 function getUserInput(event) {
   event.preventDefault();
@@ -26,29 +24,12 @@ function getUserInput(event) {
 
   console.log(cityName);
   if (!cityName) {
-    /*  console.error("Please enter a city"); */
+    $("#error-display").show();
     return;
   }
   getCityWeather(cityName);
 
 }
-
-// Fucntion to get geolocation of the user
-
-function getGeoLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    alert("Geolocation is not supported by this browser!");
-  }
-}
-function showPosition(position) {
-  /*  getUVIndex(position.coords.latitude,position.coords.longitude); // To get cur position forecast */
-  alert("Lat: " + position.coords.latitude + "Lon: " + position.coords.longitude);
-
-}
-
-
 
 function getCityListFromStorage() {
   var cityListStr = localStorage.getItem("CITY_LIST");
