@@ -1,6 +1,4 @@
-/* var $submitBtnEl = $("#submit-city"); */
 var $searchFormEl = $("#search-form");
-var $curWeatherEl = $("#cur-weather");
 
 var apiKey = "d1a3e244cfb4477cc46192f257eb4d5d";
 
@@ -60,9 +58,8 @@ function storeCity(cityName) {
 $searchFormEl.submit(getUserInput);
 
 function getCityWeather(cityName) {
-  //api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-  // using the URL api
- 
+  
+  // using the URL api to construct the url
 
   var curWeatherURL = new URL(
     "https://api.openweathermap.org/data/2.5/weather"
@@ -109,10 +106,6 @@ function renderQueryResults(queryRes) {
   $("#cur-humidity").text("Humidity: " + queryRes.main.humidity + " %");
 
   // To get uv index
-
-  // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-
-  // latitude and longitude values for the current city
 
   getUVIndex(queryRes.coord.lat, queryRes.coord.lon);
 
