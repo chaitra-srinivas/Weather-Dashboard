@@ -19,5 +19,5 @@ Screen shots:
 
 
 
-1. ![Deployed application]: https://chaitra-srinivas.github.io/
+1. ![Deployed application]: https://chaitra-srinivas.github.io/Weather-Dashboard/
 2. ![Github link]: https://github.com/chaitra-srinivas/Weather-Dashboard
