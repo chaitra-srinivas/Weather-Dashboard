@@ -8,16 +8,16 @@ Icons depicting the current and fucture weather conditions are also displyed.
 
 The application checks for invalid and empty data.
 
-This application is built using HTML5, CSS, JavaScript, Bootstrap, jQuery and momnet.js 
+This application is built using HTML5, CSS, JavaScript, Bootstrap, jQuery and moment.js 
 
 
 
 Screen shots:
-1. ![](./assets/images/)
-2. ![](./assets/images/)
-3. ![](./assets/images/)
-4. ![](./assets/images/)
+1. ![Main Page](./assets/images/WithStoredResults.png)
+2. ![Invalid Input](./assets/images/InvalidInput.png)
+3. ![No Input](./assets/images/NoInput.png)
+
 
 
 1. ![Deployed application]: https://chaitra-srinivas.github.io/
-2. ![Github link]: https://github.com/chaitra-srinivas/
+2. ![Github link]: https://github.com/chaitra-srinivas/Weather-Dashboard

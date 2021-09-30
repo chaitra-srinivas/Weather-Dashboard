@@ -1,4 +1,4 @@
-var $submitBtnEl = $("#submit-city");
+/* var $submitBtnEl = $("#submit-city"); */
 var $searchFormEl = $("#search-form");
 var $curWeatherEl = $("#cur-weather");
 
@@ -19,7 +19,7 @@ $("#error-display").hide();
 
 function getUserInput(event) {
   event.preventDefault();
-
+  
   var cityName = $("#city-name").val();
 
   console.log(cityName);
@@ -28,6 +28,7 @@ function getUserInput(event) {
     return;
   }
   getCityWeather(cityName);
+ 
 
 }
 
@@ -61,7 +62,7 @@ $searchFormEl.submit(getUserInput);
 function getCityWeather(cityName) {
   //api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
   // using the URL api
-
+ 
 
   var curWeatherURL = new URL(
     "https://api.openweathermap.org/data/2.5/weather"
@@ -221,6 +222,7 @@ function renderStoredCityList(cityList) {
     $("#search-list").append(listItem);
   }
 }
+
 
 // gets the icon from the given path
 function getIconPath(iconName) {
