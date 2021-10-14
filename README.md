@@ -1,4 +1,4 @@
-# Weather Dashboard
+# [Weather Dashboard](https://chaitra-srinivas.github.io/Weather-Dashboard/)
 # Overview
 
 Using this web application a user can view the current weather and a five day forecast for a particular city.
@@ -13,11 +13,9 @@ This application is built using HTML5, CSS, JavaScript, Bootstrap, jQuery and mo
 
 
 Screen shots:
-1. ![Main Page](./assets/images/WithStoredResults.png)
-2. ![Invalid Input](./assets/images/InvalidInput.png)
-3. ![No Input](./assets/images/NoInput.png)
+![Main Page](./assets/images/WithStoredResults.png)
+![Invalid Input](./assets/images/InvalidInput.png)
+![No Input](./assets/images/NoInput.png)
 
 
 
-1. ![Deployed application]: https://chaitra-srinivas.github.io/Weather-Dashboard/
-2. ![Github link]: https://github.com/chaitra-srinivas/Weather-Dashboard
