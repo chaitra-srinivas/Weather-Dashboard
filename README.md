@@ -11,13 +11,51 @@ The application checks for invalid and empty data.
 This application is built using HTML5, CSS, JavaScript, Bootstrap, jQuery and moment.js 
 
 
+## Table of Contents
 
-Screen shots:
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Deployed Application](#deployed-application)
+- [Questions](#questions)
+- [License](#license)
+
+  ## Installation
+
+  - Clone  the repository.
+  - Should have access to Visual Studio
+  - Launch the application using the web browser
+  
+
+  ## Usage
+
+  The deployed link will launch the application on a web browser. The user can enter the city name for which the they wish to get the current weather and forecast details.
+
+  ## Screenshots
 1. ![Main Page](./assets/images/WithStoredResults.png)
 2. ![Invalid Input](./assets/images/InvalidInput.png)
 3. ![No Input](./assets/images/NoInput.png)
 
+ 
+ ## Deployed Application
+ [Weather Dashboard](https://chaitra-srinivas.github.io/Weather-Dashboard/)
+
+  ## Questions
+
+  For any questions regarding the project please visit my
+  GitHub Profile @
+  [chaitra-srinivas](https://github.com/dfdfgfd)
+  or you can reach me @ cmurthy.dev@gmail.com
+
+  ## License
+
+  [MIT](https://opensource.org/licenses/MIT)
+  This application is convered under the MIT License.
+
+  Copyright © 2021 Chaitra Srinivasamurthy
 
 
-1. ![Deployed application]: https://chaitra-srinivas.github.io/Weather-Dashboard/
-2. ![Github link]: https://github.com/chaitra-srinivas/Weather-Dashboard
+
+
+

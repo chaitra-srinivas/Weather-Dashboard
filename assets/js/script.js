@@ -40,7 +40,7 @@ function getCityListFromStorage() {
 }
 
 function setCityListToStorage(cityList) {
-  var cityListStr = JSON.stringify(cityList);
+   var cityListStr = JSON.stringify(cityList);
   localStorage.setItem("CITY_LIST", cityListStr);
 }
 
@@ -68,17 +68,17 @@ function getCityWeather(cityName) {
   curWeatherURL.searchParams.set("units", "metric");
   curWeatherURL.searchParams.set("appid", apiKey);
 
-  fetch(curWeatherURL)
-    .then(function (response) {
-      if (!response.ok) {
-        $("#error-display").show();
-        $("#curr-weather-card").hide();
-        $("#5-day-forecast-card").hide();
-        $("#forecast-header").hide();
-        throw response.json();
-      }
-     
-      return response.json();
+fetch(curWeatherURL)
+  .then(function (response) {
+    if (!response.ok) {
+      $("#error-display").show();
+      $("#curr-weather-card").hide();
+      $("#5-day-forecast-card").hide();
+      $("#forecast-header").hide();
+      throw response.json();
+    }
+    
+    return response.json();
     })
     .then(function (queryRes) {
       console.log(queryRes);
@@ -86,6 +86,7 @@ function getCityWeather(cityName) {
       storeCity(cityName);
       renderStoredCityList(getCityListFromStorage());
     })
+
     .catch(function (error) {
       console.error(error);
     });
