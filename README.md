@@ -46,7 +46,7 @@ This application is built using HTML5, CSS, JavaScript, Bootstrap, jQuery and mo
 
   For any questions regarding the project please visit my
   GitHub Profile @
-  [chaitra-srinivas](https://github.com/dfdfgfd)
+  [chaitra-srinivas](https://github.com/chaitra-srinivas)
   or you can reach me @ cmurthy.dev@gmail.com
 
   ## License
